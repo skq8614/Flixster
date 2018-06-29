@@ -58,6 +58,8 @@ public class MovieListActivity extends AppCompatActivity {
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
 
+        Toast.makeText(getApplicationContext(), "Click any movie to view full details", Toast.LENGTH_LONG).show();
+
         //get the configuration on app creation
         getConfiguration();
     }
