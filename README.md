@@ -29,6 +29,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+Make sure to watch all the way through! I intentionally broke the movie posters at first so I could show the placeholder images
 
 <img src='https://github.com/skq8614/Flixster/blob/master/flixsterwalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
@@ -36,7 +37,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Biggest challenge was tryng to add the movie poster image to the Details page.
 
 ## Open-source libraries used
 
