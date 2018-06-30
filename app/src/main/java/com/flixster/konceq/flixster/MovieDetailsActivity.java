@@ -3,12 +3,17 @@ package com.flixster.konceq.flixster;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.flixster.konceq.flixster.models.Config;
+import com.flixster.konceq.flixster.models.GlideApp;
 import com.flixster.konceq.flixster.models.Movie;
 
 import org.parceler.Parcels;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -19,6 +24,10 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvOverview;
     RatingBar rbVoteAverage;
+    ImageView imageView;
+
+    Config config;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +37,12 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvTitle);
         tvOverview = findViewById(R.id.tvOverview);
         rbVoteAverage = findViewById(R.id.rbVoteAverage);
+        imageView = findViewById(R.id.imageView);
+
 
         //unwrap the movie passed in via intent, using its simple name as a key
         movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        config = Parcels.unwrap(getIntent().getParcelableExtra(Config.class.getSimpleName()));
         Log.d("MovieDetailsActivity", String.format("Showing details for '%s'", movie.getTitle()));
 
         //set the title and overview
@@ -40,5 +52,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         //vote average is 0..10, convert to 0..5 by diving by 2
         float voteAverage = movie.getVoteAverage().floatValue();
         rbVoteAverage.setRating(voteAverage = voteAverage > 0 ? voteAverage / 2.0f : voteAverage);
+
+        String imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
+        int placeholderId = R.drawable.flicks_movie_placeholder;
+        //load image using glide
+        GlideApp.with(this)
+                .load(imageUrl)
+                .transform(new RoundedCornersTransformation(25, 0))
+                .placeholder(placeholderId)
+                .error(placeholderId)
+                .into(imageView);
     }
 }
