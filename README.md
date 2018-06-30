@@ -25,6 +25,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Added two toasts to give clearer directions to user
+* [x] Added movie posters to details activity
 
 ## Video Walkthrough
 
